@@ -1,0 +1,33 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>Login</h2>
+    <div class="jumbotran">
+
+        <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
+            <div class="form-group">
+                <label for="email"><b>Email</b></label><br>
+                <input type="text" placeholder="Enter Email" [(ngModel)]="loginobject.email" formControlName="mailid" required>
+
+                <div *ngIf="!loginForm.get('mailid')?.valid && (loginForm.get('mailid')?.dirty 
+             || loginForm.get('mailid')?.touched)" class="error">
+                    <div *ngIf="loginForm.get('mailid').errors.required">
+                        <small class="text-danger">User Name is required</small>
+                    </div>
+                    <div *ngIf="loginForm.get('mailid').errors.email">
+                        <small class="text-danger">nvalid User Name</small>
+                    </div>
+                </div>
+            </div><br>
+            <div>
+                <label for="Password"><b>Password</b></label><br>
+                <input type="Password" placeholder="Enter password" [(ngModel)]="loginobject.password" formControlName="password" required>
+            </div> <br>
+            <button class="btn btn-success" type="submit">Sign in</button>&nbsp;&nbsp;
+            <button class="btn btn-danger" type="button">Reset</button><br><br>
+            <input type="checkbox" checked="checked">Remember me<br><br>
+            <a href="register" class="btn btn-link">New User? Register</a><br><br>
+            <a href="forgotpassword" class="btn btn-link">Forgot Password</a>
+        </form>
+    </div>
+</div>
+
+<h2 class="text text-danger">{{err}}</h2>

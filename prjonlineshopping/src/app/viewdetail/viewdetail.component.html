@@ -1,0 +1,61 @@
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <!-- Product main img -->
+            <div class="col-md-5 col-md-push-2">
+                <div id="product-main-img">
+                    <div class="product-preview">
+                        <img src="/assets/images/m1.jpg" alt="">
+                    </div>
+
+                    <div class="product-preview">
+                        <img src="" alt="">
+                    </div>
+
+                    <div class="product-preview">
+                        <img src="" alt="">
+                    </div>
+
+                    <div class="product-preview">
+                        <img src="" alt="">
+                    </div>
+                </div>
+            </div>
+            <!-- /Product main img -->
+
+            <!-- Product details -->
+            <div class="col-md-5">
+                <div class="product-details">
+                    <h2 class="product-name">{{product.ProductName}}</h2>
+                    <div>
+                        <h3 class="product-price">{{product.ProductPrice | currency:'INR':'symbol-narrow'}}</h3>
+                        <span class="product-available"><b>InStock</b>&nbsp;&nbsp;{{product.InStock}}</span>
+                    </div><br />
+                    <p>{{product.ProductDescription}}</p>
+                    <p>{{product.Brand}} </p>
+                    <!-- <div class="form-inline">
+                        <button type="button" (click)="onAddQuantity(product)"
+                            class="btn btn-success">+</button>
+                        <input type="text" style="width: 50px;" [(ngModel)]="product.Quantity"
+                            (ngModelChange)="product.Quantity=$event" class="form-control">
+                        <button type="button" (click)="onRemoveQuantity(product)"
+                            class="btn btn-danger">-</button>
+                    </div> -->
+                    <div class="add-to-cart">
+                        <button class="btn btn-sm btn-primary product-btn" (click)="AddToCart(product)"><i
+                                class="glyphicon glyphicon-shopping-cart"></i> Add to cart</button>
+                    </div><br/>
+                    <div class="add-to-wishlist">
+                        <button class="btn btn-sm btn-info product-btn" (click)="AddToWishlist(product)"><i
+                                class="glyphicon glyphicon-heart-empty"></i>Add to wishlist</button>
+                    </div><br />
+                    <div class="add-to-compare">
+                        <button>Add to Compare</button>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /Product details -->
+        </div>
+    </div>
+</div>

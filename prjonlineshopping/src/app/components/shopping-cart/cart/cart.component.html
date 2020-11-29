@@ -1,0 +1,90 @@
+<!-- <div *ngIf="cartItems.length === 0" class="alert alert-info">Your Cart is Empty.</div>
+<a class="p-2 text-dark btn btn-outline-primary" href="compare">Go to Compare Products</a>
+
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let cartItem of cartModel">
+        <div class="cart-item">
+            <span>{{cartItem.productName}}</span> x <span>
+                {{cartItem.qty}}</span> :
+            <strong>{{(cartItem.qty*cartItem.price) | currency:'INR'}}</strong>
+        </div>
+
+    </li>
+    <li class="list-group-item active">
+        <strong>Total </strong> {{cartTotal | currency:'INR'}}
+    </li>
+</ul> -->
+
+<div class="container">
+    <div class="text-center my-5">
+        <h4 *ngIf="cartModel.length == 0">Your Cart Is Empty</h4>
+        <a href='home' class="btn btn-primary btn-lg mt-3">Continue Shopping</a>
+    </div>
+    <!--If cart is not empty-->
+    <ng-container>
+        <div class="row">
+            <div class="col my-4">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Sr No.</th>
+                            <th>Image</th>
+                            <th>ProductName</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                            <th style="width: 200px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cartItem of cartModel; let i=index">
+                            <td>
+                                <p>{{i + 1}}</p>
+                            </td>
+                            <td><img width="130px;" height="130px;" />
+                            </td>
+                            <td>
+                                <p>{{cartItem.ProductName}}</p>
+                            </td>
+                            <td>
+                                <p>{{cartItem.ProductPrice}}</p>
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <button type="button" (click)="onAddQuantity(cartItem)"
+                                        class="btn btn-success">+</button>
+                                    <input type="text" (focusout)="UpdateCart(cartItem)" style="width: 50px;"
+                                        [(ngModel)]="cartItem.Quantity" (ngModelChange)="cartItem.Quantity=$event"
+                                        class="form-control">
+                                    <button type="button" (click)="onRemoveQuantity(cartItem)"
+                                        class="btn btn-danger">-</button>
+                                </div>
+                            </td>
+                            <td>
+                                <p>{{cartItem.TotalPrice}}</p>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" (click)="handleRemoveFromCart(cartItem.CartID)">Remove
+                                    From
+                                    Cart</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-12 d-flex mb-5">
+                <div class="d-flex w-100 justify-content-between flex-sm-column flex-md-row">
+                    <p><b>Total Price : {{cartTotal}} </b></p>
+                </div>
+            </div>
+            <div class="col-md-12 d-flex mb-5">
+                <div class="d-flex w-100 justify-content-between flex-sm-column flex-md-row">
+                    <button class="btn btn-danger" (click)="Checkout()">Chekout</button>
+                </div>
+            </div>
+
+        </div>
+    </ng-container>
+
+</div>

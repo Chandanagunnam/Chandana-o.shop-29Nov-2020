@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="jumbotron text-center">
+        <h1>Mobiles</h1>
+        <p></p>
+    </div>
+    <div class="col-sm-4" *ngFor="let p of products;let i=index">
+        <h3>Product Name: {{p.ProductName}}</h3>
+        <img src="assets/images/m1.jpg" alt="" />
+        <p>Product Description: {{p.ProductDescription}}</p>
+        <p>Price: {{p.ProductPrice}}</p>
+        <button type="button" class="btn btn-primary" (click)="AddToCart(p)">Add To Cart</button>
+    </div>
+</div>

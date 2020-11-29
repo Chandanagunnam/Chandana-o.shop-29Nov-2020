@@ -1,0 +1,136 @@
+<form>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label><b>Product Code</b></label>
+        <input type="text" name="ProductCode" [(ngModel)]="prod.ProductCode" />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label><b>Product Name</b></label>
+        <input type="text" name="ProductName" [(ngModel)]="prod.ProductName" />
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label><b>Category Name</b></label>
+    <select name="CategoryID" [(ngModel)]="prod.CategoryID">
+      <option value="0">Select Category</option>
+      <option *ngFor="let Category of categorylist" value="{{Category.CategoryID}}">{{Category.CategoryName}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label><b>Product Description</b></label>
+    <input type="text" name="ProductDescription" [(ngModel)]="prod.ProductDescription" />
+  </div>
+  <div class="form-group">
+    <label><b>Product Price</b></label>
+    <input type="text" name="ProductPrice" [(ngModel)]="prod.ProductPrice" />
+  </div>
+  <div class="form-group">
+    <label><b>Brand</b></label>
+    <input type="text" name="Brand" [(ngModel)]="prod.Brand" />
+  </div>
+  <div class="form-group">
+    <label><b>Quantity</b></label>
+    <input type="number" name="Quantity" [(ngModel)]="prod.Quantity" />
+  </div>
+  <!--<div class="form-group">
+    <label><b>Stock</b></label>&nbsp;
+    <input type="radio" name="Instock" value="true" [(ngModel)]="prod.InStock" />&nbsp;InStock&nbsp;
+    <input type="radio" name="Instock" value="false" [(ngModel)]="prod.InStock" />&nbsp;OutOfStock
+  </div>-->
+
+  <button *ngIf=" prod.ProductID != 0" class="btn btn-lg btn-outline-primary" (click)="open(content)">Add Product
+    Images</button>
+
+  <div class="form-group">
+    <button (click)="SaveProduct()">{{addUpdate}} Product</button>
+  </div>
+</form>
+<hr>
+<h3>Product Management</h3>
+<hr>
+<table>
+  <tr>
+    <th style="width: 50px;">Sr No.</th>
+    <th style="width: 100px;">Image</th>
+    <th style="width: 100px;">Product Code</th>
+    <th style="width: 100px;">Product Name</th>
+    <th style="width: 150px;">Product Description</th>
+    <th style="width: 100px;">Product Price</th>
+    <th style="width: 100px;">Brand</th>
+    <th style="width: 100px;">Quantity</th>
+    <th style="width: 100px;">Instock</th>
+    <th style="width: 200px;">Actions</th>
+  </tr>
+
+  <tr *ngFor="let p of products; let i=index">
+    <td style="width: 50px;">{{i + 1}}</td>
+    <td style="width: 100px;">{{p.ImageID}}</td>
+    <td style="width: 100px;">{{p.ProductCode}}</td>
+    <td style="width: 100px;">{{p.ProductName}}</td>
+    <td style="width: 150px;">{{p.ProductDescription}}</td>
+    <td style="width: 100px;">{{p.ProductPrice}}</td>
+    <td style="width: 100px;">{{p.Brand}}</td>
+    <td style="width: 100px;">{{p.Quantity}}</td>
+    <td style="width: 100px;">{{p.InStock ? 'Yes' : 'No'}}</td>
+    <td style="width: 200px;"><button (click)="GetProductById(p.ProductID)">Edit</button> |
+      <button class="btn btn-danger" (click)="openDeletePopup(contentdelete, p.ProductID);">Delete</button>
+    </td>
+  </tr>
+</table>
+
+<!-- Delete Popup Start -->
+<ng-template #contentdelete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <p>Are you Sure you want to Delete?</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="DeleteProduct()">Ok</button>
+  </div>
+</ng-template>
+<!-- Delete Popup End -->
+
+<!-- Image Popup Start -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Product Images</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label><b>Upload Image</b></label>&nbsp;
+      <input type="file" name="image" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+    </div>
+
+    <table>
+      <tr>
+        <th style="width: 100px;">Image Name</th>
+        <th style="width: 100px;">Image</th>
+        <th style="width: 100px;">IsDefault</th>
+      </tr>
+
+      <tr *ngFor="let p of productImages;let i=index">
+        <td style="width: 100px;">{{p.ProductImage}}</td>
+        <td style="width: 100px;"><img [src]="imageUrl" style="width: 130px; height: 130px;"></td>
+        <td style="width: 100px;"><input type="checkbox" /></td>
+      </tr>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+  </div>
+</ng-template>
+<!-- Image Popup End -->

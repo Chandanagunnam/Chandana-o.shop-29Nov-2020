@@ -1,0 +1,7 @@
+.product-preview{
+    padding: 50px;
+    transition: transform .2s; 
+    }
+    .product-preview:hover{
+        transform: scale(1.5); 
+    }
